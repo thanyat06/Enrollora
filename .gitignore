@@ -1,0 +1,45 @@
+# ==============================
+# ANGULAR FRONTEND
+# ==============================
+
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+
+# ==============================
+# ASP.NET CORE BACKEND
+# ==============================
+
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.suo
+
+# ==============================
+# ENVIRONMENT & SECRETS
+# ==============================
+
+**/.env
+**/.env.*
+!**/.env.example
+
+# User-specific configuration
+**/appsettings.Development.json
+
+# ==============================
+# IDE & OS FILES
+# ==============================
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# LOGS
+# ==============================
+
+*.log
