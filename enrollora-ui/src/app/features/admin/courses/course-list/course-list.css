@@ -490,3 +490,335 @@
     padding: 18px;
   }
 }
+
+/* Success Message */
+
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #e9f8ef;
+  color: #16834a;
+  padding: 13px 17px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.success-message > span {
+  font-size: 17px;
+}
+
+.success-message button {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Course Actions */
+
+.course-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-deactivate {
+  border: none;
+  padding: 7px 11px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: #f0eaff;
+  color: #8050d8;
+}
+
+.btn-edit:hover {
+  background: #e3d7ff;
+}
+
+.btn-deactivate {
+  background: #fff0f0;
+  color: #d64545;
+}
+
+.btn-deactivate:hover {
+  background: #ffe0e0;
+}
+
+/* Course Modal */
+
+.course-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(25, 18, 40, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.course-modal {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(25, 18, 40, 0.2);
+  overflow: hidden;
+  animation: courseModalAppear 0.25s ease-out;
+}
+
+@keyframes courseModalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+
+.course-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 26px;
+  border-bottom: 1px solid #f0edf5;
+}
+
+.modal-eyebrow {
+  color: #8b5cf6;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.course-modal-header h2 {
+  color: #302942;
+  font-size: 21px;
+  font-weight: 800;
+  margin: 7px 0;
+}
+
+.course-modal-header p {
+  color: #9892a5;
+  font-size: 13px;
+  margin: 0;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: #f5f2fa;
+  color: #756b88;
+  font-size: 22px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.modal-close:hover {
+  background: #ebe5f5;
+}
+
+/* Modal Body */
+
+.course-modal-body {
+  padding: 24px 26px 10px;
+}
+
+.form-group {
+  margin-bottom: 19px;
+}
+
+.form-group > label {
+  display: block;
+  color: #514963;
+  font-size: 12px;
+  font-weight: 750;
+  margin-bottom: 8px;
+}
+
+.form-group > label span {
+  color: #e04444;
+}
+
+.course-modal .form-control {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid #e6e1ee;
+  border-radius: 9px;
+  background: #fff;
+  color: #352c49;
+  font-size: 13px;
+  outline: none;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.course-modal .form-control:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.course-modal .form-control::placeholder {
+  color: #b0a9bd;
+}
+
+.validation-error {
+  display: block;
+  color: #d64545;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* Active Status */
+
+.status-form-group {
+  padding: 13px;
+  background: #faf8fd;
+  border-radius: 10px;
+  border: 1px solid #f0edf5;
+}
+
+.active-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  margin: 0 !important;
+}
+
+.active-toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: #8b5cf6;
+  cursor: pointer;
+}
+
+.active-toggle span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.active-toggle strong {
+  color: #514963;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.active-toggle small {
+  color: #9892a5;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* Form Error */
+
+.form-error-message {
+  background: #fff0f0;
+  color: #c24141;
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+/* Modal Footer */
+
+.course-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 17px 26px 22px;
+  border-top: 1px solid #f0edf5;
+}
+
+.btn-cancel,
+.btn-save {
+  border: none;
+  padding: 11px 18px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #f3f0f7;
+  color: #716780;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: #e9e4f1;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.btn-save:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+}
+
+.btn-save:disabled,
+.btn-cancel:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Responsive Modal */
+
+@media (max-width: 600px) {
+  .course-modal-backdrop {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .course-modal {
+    margin: auto 0;
+  }
+
+  .course-modal-header {
+    padding: 19px;
+  }
+
+  .course-modal-body {
+    padding: 19px 19px 5px;
+  }
+
+  .course-modal-footer {
+    padding: 15px 19px 19px;
+  }
+
+  .course-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
