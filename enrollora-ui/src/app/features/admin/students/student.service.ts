@@ -67,4 +67,17 @@ export class StudentService {
   deleteStudent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  
+  // Get current logged-in student's profile
+  getMyProfile(): Observable<StudentResponse> {
+    return this.http.get<StudentResponse>(`${this.apiUrl}/me`);
+  }
+
+  // Update current logged-in student's profile
+  updateMyProfile(
+    studentData: UpdateStudentRequest,
+  ): Observable<StudentResponse> {
+    return this.http.put<StudentResponse>(`${this.apiUrl}/me`, studentData);
+  }
 }

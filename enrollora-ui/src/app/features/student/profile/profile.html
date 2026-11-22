@@ -1,0 +1,319 @@
+<div class="profile-page">
+  <!-- Page Header -->
+  <div class="profile-heading">
+    <div>
+      <span class="eyebrow">STUDENT PORTAL</span>
+      <h1>My Profile</h1>
+      <p>View and manage your personal information.</p>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  @if (successMessage()) {
+    <div class="success-alert">
+      <span>✓</span>
+      {{ successMessage() }}
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="loader"></div>
+      <p>Loading your profile...</p>
+    </div>
+  }
+
+  <!-- Error -->
+  @else if (errorMessage() && !profile()) {
+    <div class="error-alert">
+      <span>⚠</span>
+
+      <div>
+        <strong>Something went wrong</strong>
+        <p>{{ errorMessage() }}</p>
+      </div>
+
+      <button class="retry-btn" (click)="loadProfile()">
+        Retry
+      </button>
+    </div>
+  }
+
+  <!-- Profile Content -->
+  @else if (profile()) {
+    <div class="profile-grid">
+
+      <!-- Profile Overview -->
+      <section class="profile-card profile-overview">
+        <div class="profile-cover"></div>
+
+        <div class="profile-avatar">
+          {{ profile()!.name.charAt(0).toUpperCase() }}
+        </div>
+
+        <div class="profile-identity">
+          <h2>{{ profile()!.name }}</h2>
+          <p>{{ profile()!.email }}</p>
+
+          <span
+            class="status-badge"
+            [class.pending]="profile()!.status === 0"
+            [class.approved]="profile()!.status === 1"
+            [class.rejected]="profile()!.status === 2"
+          >
+            <span class="status-dot"></span>
+            {{ statusLabel(profile()!.status) }}
+          </span>
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <div class="profile-overview-details">
+          <div class="overview-item">
+            <span class="overview-icon">🎓</span>
+
+            <div>
+              <small>Student ID</small>
+              <strong>#{{ profile()!.studentId }}</strong>
+            </div>
+          </div>
+
+          <div class="overview-item">
+            <span class="overview-icon">📅</span>
+
+            <div>
+              <small>Registered On</small>
+              <strong>
+                {{ profile()!.registeredAt | date: 'dd MMM yyyy' }}
+              </strong>
+            </div>
+          </div>
+
+          @if (profile()!.reviewedAt) {
+            <div class="overview-item">
+              <span class="overview-icon">✓</span>
+
+              <div>
+                <small>Reviewed On</small>
+                <strong>
+                  {{ profile()!.reviewedAt | date: 'dd MMM yyyy' }}
+                </strong>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Personal Information -->
+      <section class="profile-card personal-info-card">
+        <div class="section-header">
+          <div>
+            <h2>Personal Information</h2>
+            <p>Your registered student details.</p>
+          </div>
+
+          @if (!isEditing()) {
+            <button
+              class="btn-edit"
+              (click)="editProfile()"
+            >
+              ✎ Edit Profile
+            </button>
+          }
+        </div>
+
+        <!-- View Mode -->
+        @if (!isEditing()) {
+          <div class="info-grid">
+
+            <div class="info-item">
+              <label>Full Name</label>
+              <div class="info-value">
+                {{ profile()!.name }}
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label>Email Address</label>
+              <div class="info-value">
+                {{ profile()!.email }}
+              </div>
+              <small class="field-note">Email cannot be changed.</small>
+            </div>
+
+            <div class="info-item">
+              <label>Department</label>
+              <div class="info-value">
+                {{ profile()!.department }}
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label>Age</label>
+              <div class="info-value">
+                {{ profile()!.age }} years
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label>CGPA</label>
+              <div class="info-value cgpa-value">
+                {{ profile()!.cgpa | number: '1.2-2' }} / 10
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Edit Mode -->
+        @else {
+          <form
+            [formGroup]="profileForm"
+            (ngSubmit)="saveProfile()"
+          >
+            <div class="info-grid">
+
+              <!-- Name -->
+              <div class="form-group">
+                <label for="name">Full Name <span>*</span></label>
+
+                <input
+                  id="name"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder="Enter your full name"
+                />
+
+                @if (
+                  profileForm.controls.name.touched &&
+                  profileForm.controls.name.invalid
+                ) {
+                  <small class="validation-error">
+                    Name is required and must be within 120 characters.
+                  </small>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label>Email Address</label>
+
+                <input
+                  type="email"
+                  class="form-control readonly-input"
+                  [value]="profile()!.email"
+                  readonly
+                />
+
+                <small class="field-note">
+                  Email cannot be changed.
+                </small>
+              </div>
+
+              <!-- Department -->
+              <div class="form-group">
+                <label for="department">Department <span>*</span></label>
+
+                <input
+                  id="department"
+                  type="text"
+                  class="form-control"
+                  formControlName="department"
+                  placeholder="Enter your department"
+                />
+
+                @if (
+                  profileForm.controls.department.touched &&
+                  profileForm.controls.department.invalid
+                ) {
+                  <small class="validation-error">
+                    Department is required and must be within 100 characters.
+                  </small>
+                }
+              </div>
+
+              <!-- Age -->
+              <div class="form-group">
+                <label for="age">Age <span>*</span></label>
+
+                <input
+                  id="age"
+                  type="number"
+                  class="form-control"
+                  formControlName="age"
+                  min="17"
+                  max="60"
+                />
+
+                @if (
+                  profileForm.controls.age.touched &&
+                  profileForm.controls.age.invalid
+                ) {
+                  <small class="validation-error">
+                    Age must be between 17 and 60.
+                  </small>
+                }
+              </div>
+
+              <!-- CGPA -->
+              <div class="form-group">
+                <label for="cgpa">CGPA <span>*</span></label>
+
+                <input
+                  id="cgpa"
+                  type="number"
+                  class="form-control"
+                  formControlName="cgpa"
+                  min="0"
+                  max="10"
+                  step="0.01"
+                />
+
+                @if (
+                  profileForm.controls.cgpa.touched &&
+                  profileForm.controls.cgpa.invalid
+                ) {
+                  <small class="validation-error">
+                    CGPA must be between 0 and 10.
+                  </small>
+                }
+              </div>
+            </div>
+
+            <!-- API Error -->
+            @if (errorMessage()) {
+              <div class="form-error">
+                ⚠ {{ errorMessage() }}
+              </div>
+            }
+
+            <!-- Actions -->
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn-cancel"
+                (click)="cancelEdit()"
+                [disabled]="isSaving()"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                class="btn-save"
+                [disabled]="isSaving()"
+              >
+                @if (isSaving()) {
+                  Saving...
+                } @else {
+                  Save Changes
+                }
+              </button>
+            </div>
+          </form>
+        }
+      </section>
+    </div>
+  }
+</div>
