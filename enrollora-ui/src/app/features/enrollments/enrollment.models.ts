@@ -24,3 +24,27 @@ export interface EnrollmentFilter {
 }
 
 export type EnrollmentPagedResult = PagedResult<EnrollmentResponse>;
+
+export enum CancellationStatus {
+  Pending = 0,
+  Approved = 1,
+  Rejected = 2,
+}
+
+export interface CancellationRequestResponse {
+  cancellationRequestId: number;
+  enrollmentId: number;
+  studentId: number;
+  studentName: string;
+  studentEmail: string;
+  courseName: string;
+  reason: string;
+  status: CancellationStatus;
+  requestedAt: string;
+  reviewedAt: string | null;
+  adminRemarks: string | null;
+}
+
+export interface CreateCancellationRequest {
+  reason: string;
+}
