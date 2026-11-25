@@ -34,13 +34,18 @@ export const routes: Routes = [
             (m) => m.CourseListComponent,
           ),
       },
-
       {
         path: 'enrollments',
         loadComponent: () =>
           import('./features/enrollments/admin/enrollment-list/enrollment-list').then(
             (m) => m.EnrollmentListComponent,
           ),
+      },
+      {
+        path: 'cancellation-requests',
+        loadComponent: () =>
+        import('./features/admin/cancellation-requests/cancellation-list/cancellation-list').then(
+          (m) => m.CancellationListComponent),
       },
     ],
   },
@@ -76,6 +81,13 @@ export const routes: Routes = [
           import('./features/student/profile/profile').then(
             (m) => m.Profile,
           ),
+      },
+      {
+        path: 'cancellation-history',
+        loadComponent: () =>
+        import(
+          './features/student/cancellation-requests/cancellation-history/cancellation-history'
+        ).then((m) => m.CancellationHistory),
       },
       {
         path: '',

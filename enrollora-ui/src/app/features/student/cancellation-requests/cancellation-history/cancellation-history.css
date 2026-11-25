@@ -1,0 +1,26 @@
+@import '../../../enrollments/student/my-enrollments/my-enrollments.css';
+
+.reason-cell {
+  max-width: 220px;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.status-badge.pending {
+  background: #fff7df;
+  color: #b7791f;
+}
+
+.status-badge.approved {
+  background: #e9f8ef;
+  color: #16834a;
+}
+
+.status-badge.rejected {
+  background: #fff0f0;
+  color: #c24141;
+}
+
+table {
+  min-width: 950px;
+}

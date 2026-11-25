@@ -48,3 +48,16 @@ export interface CancellationRequestResponse {
 export interface CreateCancellationRequest {
   reason: string;
 }
+
+export interface ReviewCancellationRequest {
+  adminRemarks?: string | null;
+}
+
+export interface CancellationFilter {
+  search?: string;
+  courseId?: number | null;
+  status?: number | null;
+  fromDate?: string;
+  toDate?: string;
+  sortOrder?: string;
+}
